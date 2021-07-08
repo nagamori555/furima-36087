@@ -43,34 +43,34 @@
 | ------------------ | ---------- | ------------------------------- |
 | user               | references | null: false, foreign_key: true  |
 | item               | references | null: false, foreign_key: true  |
-| address            | references | null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :user
 - belongs_to :item
-- belongs_to :address
+- has_one :address
 
 
 ## addresses テーブル
 | Column             | Type       | Options                         |
 | ------------------ | ---------- | ------------------------------- |
-| postal_code_id     | string     | null: false                     |
+| postal_code        | string     | null: false                     |
 | prefecture_id      | integer    | null: false                     |
 | city               | string     | null: false                     |
 | house_number       | string     | null: false                     |
 | building_name      | string     |                                 |
 | telephone          | string     | null: false                     |
+| purchase_record    | references | null: false, foreign_key: true  |
 
 ### Association
-- has_one :purchase_record
+- belongs_to :purchase_record
 
 
 ## comments テーブル
 | Column             | Type       | Options                         |
 | ------------------ | ---------- | ------------------------------- |
 | comment            | text       | null: false                     |
-| user_id            | references | null: false, foreign_key: true  |
-| item_id            | references | null: false, foreign_key: true  |
+| user               | references | null: false, foreign_key: true  |
+| item               | references | null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :user
