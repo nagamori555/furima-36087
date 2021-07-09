@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :price, numericality: {only_integer: true, greater_than: 299, less_thanor_equal_to: 9999999, message: "is invalid."}
+  validates :price, numericality: {only_integer: true, greater_than: 299, less_than: 10000000, message: "is invalid."}
   with_options presence: true do
     validates :image
     validates :item_name, length: {maximum: 40}
