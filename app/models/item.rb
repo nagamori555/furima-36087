@@ -9,15 +9,18 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :price, numericality: {only_integer: true, greater_than: 299, less_than: 10000000, message: "is invalid."}
+  
   with_options presence: true do
     validates :image
+    with_options numericality: {other_than: 0 , message: "can't be blank"} do
+      validates :category_id
+      validates :status_id
+      validates :delivery_fee_id
+      validates :prefecture_id
+      validates :days_to_ship_id
+    end
     validates :item_name, length: {maximum: 40}
     validates :description, length: {maximum: 1000}
-    validates :category_id, numericality: {other_than: 0 , message: "can't be blank"}
-    validates :status_id, numericality: {other_than: 0 , message: "can't be blank"}
-    validates :delivery_fee_id, numericality: {other_than: 0 , message: "can't be blank"}
-    validates :prefecture_id, numericality: {other_than: 0 , message: "can't be blank"}
-    validates :days_to_ship_id, numericality: {other_than: 0 , message: "can't be blank"}
+    validates :price, numericality: {only_integer: true, greater_than: 299, less_than: 10000000, message: "is invalid."}
   end
 end
