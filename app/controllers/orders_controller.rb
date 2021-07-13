@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
+  before_action :confirm_user, only: [:index, :create]
+  before_action :confirm_item, only: [:index, :create]
+
   def index
     @purchase_address = PurchaseAddress.new
   end
@@ -32,6 +35,16 @@ class OrdersController < ApplicationController
       card: @purchase_address.token,
       currency: 'jpy'
       )
+  end
+  def confirm_user
+    if @item.user.id == current_user.id
+      redirect_to root_path
+    end
+  end
+  def confirm_item
+    unless @item.purchase_record.blank?
+      redirect_to root_path
+    end
   end
 end
 
