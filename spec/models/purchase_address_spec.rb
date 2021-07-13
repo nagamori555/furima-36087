@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe PurchaseAddress, type: :model do
   describe 'アドレス登録' do
     before do
-      @purchase_address = FactoryBot.build(:purchase_address)
+      user = FactoryBot.build(:user)
+      item = FactoryBot.build(:item)
+      @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id )
     end
 
     context '内容に問題ない場合' do
