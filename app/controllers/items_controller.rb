@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
   end
 
   def confirm_user
-    unless @item.user.id == current_user.id
+    unless @item.user.id == current_user.id && @item.purchase_record.blank?
       redirect_to root_path
     end
   end
